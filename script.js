@@ -59,7 +59,7 @@ const calculateInput = function (input) {
     }
     return result;
 }
-const buttonDisabler = function () {
+const disableButtonsIfNecessary = function () {
     content = outputBox.innerHTML;
     lastCharacter = content.slice(-1);
     if (containsCalcCharacters(lastCharacter) || !lastCharacter) { //Checks for calcCharacter and emptyness since a calc-character can't be first
@@ -103,6 +103,6 @@ clearButton.addEventListener('click', () => {
 
 allButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        buttonDisabler();
+        disableButtonsIfNecessary();
     })
 })
