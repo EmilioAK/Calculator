@@ -29,8 +29,7 @@ const parseInputString = function (string) {
     // Output: [123, "+", 123]
     specialCharacters = RegExp('[-+/*]');
 
-    lastCharacterOfString = string[string.length - 1];
-    if (specialCharacters.test(lastCharacterOfString)) {
+    while (specialCharacters.test(string[string.length - 1])) {
         stringWithoutLastCharacter = string.substring(0, string.length - 1)
         string = stringWithoutLastCharacter
     }
