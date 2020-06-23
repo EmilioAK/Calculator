@@ -14,8 +14,6 @@ const clearButton = document.querySelector('#clear');
 
 const outputBox = document.querySelector('#outputBox');
 
-let operationToPerform = '';
-
 const populateOutputBox = function (buttonType) {
     // Adds numbers user inputs to outputbox
     buttonType.forEach((button) => {
