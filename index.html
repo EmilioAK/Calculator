@@ -7,27 +7,31 @@
 <body>
     <div class="container">
         <div class="output">
-            <h1></h1>
+            <h1 id="outputBox"></h1>
         </div>
-        <div class="numbers">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>0</button>
+        <div id="numberButtons">
+            <input type="button" class="numberButton" value="1">
+            <input type="button" class="numberButton" value="2">
+            <input type="button" class="numberButton" value="3">
+            <input type="button" class="numberButton" value="4">
+            <input type="button" class="numberButton" value="5">
+            <input type="button" class="numberButton" value="6">
+            <input type="button" class="numberButton" value="7">
+            <input type="button" class="numberButton" value="8">
+            <input type="button" class="numberButton" value="9">
+            <input type="button" class="numberButton" value="0">
         </div>
         <div class="operations">
-            <button>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
-            <button>=</button>
-            <button>CE</button>
+            <input type="button" value="+" class="operationButton">
+            <input type="button" value="-" class="operationButton">
+            <input type="button" value="*" class="operationButton">
+            <input type="button" value="/" class="operationButton">
+        </div>
+        <div class="calculate">
+            <input type="button" value="=" id="equals">
+        </div>
+        <div class="clear">
+            <input type="button" value="CE" id="clear">
         </div>
     </div>
     <script src="script.js"></script>
