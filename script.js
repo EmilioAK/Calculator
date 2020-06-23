@@ -11,9 +11,8 @@ const numberButtons = document.querySelectorAll(".numberButton");
 const operationButtons = document.querySelectorAll('.operationButton');
 const equalsButton = document.querySelector('#equals');
 const clearButton = document.querySelector('#clear');
-const allButtons = Array.from(document.getElementsByTagName("input")); // Array.from() needed since it's not given in the same form as the others
 const backspace = document.querySelector('#backspace');
-
+const allButtons = Array.from(document.getElementsByTagName("input")); // Array.from() needed since it's not given in the same form as the others
 const outputBox = document.querySelector('#outputBox');
 
 const containsCalcCharacters = function (string) {
