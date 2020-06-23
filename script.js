@@ -11,6 +11,7 @@ const numberButtons = document.querySelectorAll(".numberButton");
 const operationButtons = document.querySelectorAll('.operationButton');
 const equalsButton = document.querySelector('#equals');
 const clearButton = document.querySelector('#clear');
+const backspace = document.querySelector('#backspace');
 
 const outputBox = document.querySelector('#outputBox');
 
@@ -66,6 +67,12 @@ const calculateInput = function (input) {
 
 clearButton.addEventListener('click', () => {
     outputBox.innerHTML = '';
+})
+
+backspace.addEventListener('click', () => {
+    content = outputBox.innerHTML;
+    contentWithoutLastCharacter = content.substring(0, content.length - 1);
+    outputBox.innerHTML = contentWithoutLastCharacter;
 })
 
 equalsButton.addEventListener('click', () => {
