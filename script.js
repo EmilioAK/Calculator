@@ -14,6 +14,7 @@ const clearButton = document.querySelector('#clear');
 
 const outputBox = document.querySelector('#outputBox');
 
+let operationToPerform = '';
 
 const populateOutputBox = function (buttonType) {
     buttonType.forEach((button) => {
@@ -29,6 +30,7 @@ clearButton.addEventListener('click', () => {
 })
 
 equalsButton.addEventListener('click', () => {
+    operationToPerform = outputBox.innerHTML;
 })
 
 populateOutputBox(numberButtons);
