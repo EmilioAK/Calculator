@@ -15,25 +15,10 @@ const backspace = document.querySelector('#backspace');
 
 const outputBox = document.querySelector('#outputBox');
 
-const populateOutputBox = function (buttonType) {
-    // Adds numbers user inputs to outputbox
-    buttonType.forEach((button) => {
-        button.addEventListener('click', () => {
-            elementToDisplay = document.createTextNode(button.value);
-            outputBox.appendChild(elementToDisplay);
-        })
-    })
-}
 
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
     specialCharacters = RegExp('[-+/*]');
-
-    while (specialCharacters.test(string[string.length - 1])) {
-        stringWithoutLastCharacter = string.substring(0, string.length - 1)
-        string = stringWithoutLastCharacter
-    }
-
     parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
 
     typeFixedArray = parsedArray.map(e => {
@@ -73,13 +58,15 @@ const calculateInput = function (input) {
 
 clearButton.addEventListener('click', () => {
     outputBox.innerHTML = '';
+    operationButtons.forEach((button) => button.disabled = true);
+    equalsButton.disabled = true;
 })
 
-backspace.addEventListener('click', () => {
-    content = outputBox.innerHTML;
-    contentWithoutLastCharacter = content.substring(0, content.length - 1);
-    outputBox.innerHTML = contentWithoutLastCharacter;
-})
+// backspace.addEventListener('click', () => {
+//     content = outputBox.innerHTML;
+//     contentWithoutLastCharacter = content.substring(0, content.length - 1);
+//     outputBox.innerHTML = contentWithoutLastCharacter;
+// })
 
 equalsButton.addEventListener('click', () => {
     operationToPerform = outputBox.innerHTML;
@@ -88,5 +75,20 @@ equalsButton.addEventListener('click', () => {
     outputBox.innerHTML = parsedInput;
 })
 
-populateOutputBox(numberButtons);
-populateOutputBox(operationButtons);
+operationButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        elementToDisplay = document.createTextNode(button.value);
+        outputBox.appendChild(elementToDisplay);
+        operationButtons.forEach((button) => button.disabled = true);
+        equalsButton.disabled = true;
+    })
+})
+
+numberButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        operationButtons.forEach((button) => button.disabled = false)
+        equalsButton.disabled = false;
+        elementToDisplay = document.createTextNode(button.value);
+        outputBox.appendChild(elementToDisplay);
+    })
+})
