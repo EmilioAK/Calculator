@@ -93,6 +93,13 @@ numberButtons.forEach((button) => {
     })
 })
 
+backspace.addEventListener('click', () => {
+    content = outputBox.innerHTML;
+    contentWithoutLastCharacter = content.substring(0, content.length - 1);
+    outputBox.innerHTML = contentWithoutLastCharacter;
+})
+
+
 clearButton.addEventListener('click', () => {
     outputBox.innerHTML = '';
 })
