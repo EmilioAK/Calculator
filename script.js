@@ -74,7 +74,6 @@ const buttonDisabler = function () {
 equalsButton.addEventListener('click', () => {
     operationToPerform = outputBox.innerHTML;
     parsedInput = parseInputString(operationToPerform);
-    console.log(calculateInput(parsedInput));
     outputBox.innerHTML = parsedInput;
 })
 
@@ -97,7 +96,6 @@ backspace.addEventListener('click', () => {
     contentWithoutLastCharacter = content.substring(0, content.length - 1);
     outputBox.innerHTML = contentWithoutLastCharacter;
 })
-
 
 clearButton.addEventListener('click', () => {
     outputBox.innerHTML = '';
