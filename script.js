@@ -11,6 +11,7 @@ const numberButtons = document.querySelectorAll(".numberButton");
 const operationButtons = document.querySelectorAll('.operationButton');
 const equalsButton = document.querySelector('#equals');
 const clearButton = document.querySelector('#clear');
+const allButtons = Array.from(document.getElementsByTagName("input")); // Array.from() needed since it's not given in the same form as the others
 const backspace = document.querySelector('#backspace');
 
 const outputBox = document.querySelector('#outputBox');
@@ -59,18 +60,17 @@ const calculateInput = function (input) {
     }
     return result;
 }
-
-clearButton.addEventListener('click', () => {
-    outputBox.innerHTML = '';
-    operationButtons.forEach((button) => button.disabled = true);
-    equalsButton.disabled = true;
-})
-
-// backspace.addEventListener('click', () => {
-//     content = outputBox.innerHTML;
-//     contentWithoutLastCharacter = content.substring(0, content.length - 1);
-//     outputBox.innerHTML = contentWithoutLastCharacter;
-// })
+const buttonDisabler = function () {
+    content = outputBox.innerHTML;
+    lastCharacter = content.slice(-1);
+    if (containsCalcCharacters(lastCharacter) || !lastCharacter) { //Checks for calcCharacter and emptyness since a calc-character can't be first
+        operationButtons.forEach((button) => button.disabled = true);
+        equalsButton.disabled = true;
+    } else {
+        operationButtons.forEach((button) => button.disabled = false);
+        equalsButton.disabled = false;
+    }
+}
 
 equalsButton.addEventListener('click', () => {
     operationToPerform = outputBox.innerHTML;
@@ -83,16 +83,22 @@ operationButtons.forEach((button) => {
     button.addEventListener('click', () => {
         elementToDisplay = document.createTextNode(button.value);
         outputBox.appendChild(elementToDisplay);
-        operationButtons.forEach((button) => button.disabled = true);
-        equalsButton.disabled = true;
     })
 })
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        operationButtons.forEach((button) => button.disabled = false)
-        equalsButton.disabled = false;
         elementToDisplay = document.createTextNode(button.value);
         outputBox.appendChild(elementToDisplay);
+    })
+})
+
+clearButton.addEventListener('click', () => {
+    outputBox.innerHTML = '';
+})
+
+allButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        buttonDisabler();
     })
 })
