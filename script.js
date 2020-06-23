@@ -15,14 +15,18 @@ const backspace = document.querySelector('#backspace');
 
 const outputBox = document.querySelector('#outputBox');
 
+const containsCalcCharacters = function (string) {
+    calcCharacters = RegExp('[-+/*]');
+    return calcCharacters.test(string);
+}
+
 
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
-    specialCharacters = RegExp('[-+/*]');
     parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
 
     typeFixedArray = parsedArray.map(e => {
-        if (specialCharacters.test(e)) {
+        if (containsCalcCharacters(e)) {
             return e;
         } else {
             return parseInt(e);
