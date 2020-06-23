@@ -27,8 +27,15 @@ const populateOutputBox = function (buttonType) {
 
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
-    parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
     specialCharacters = RegExp('[-+/*]');
+
+    lastCharacterOfString = string[string.length - 1];
+    if (specialCharacters.test(lastCharacterOfString)) {
+        stringWithoutLastCharacter = string.substring(0, string.length - 1)
+        string = stringWithoutLastCharacter
+    }
+
+    parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
 
     typeFixedArray = parsedArray.map(e => {
         if (specialCharacters.test(e)) {
