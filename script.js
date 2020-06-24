@@ -13,18 +13,19 @@ const equalsButton = document.querySelector('#equals');
 const clearButton = document.querySelector('#clear');
 const allButtons = Array.from(document.getElementsByTagName("input")); // Array.from() needed since it's not given in the same form as the others
 const backspace = document.querySelector('#backspace');
-
 const outputBox = document.querySelector('#outputBox');
 
+const calcCharacters = '[-+/*]';
+
 const containsCalcCharacters = function (string) {
-    calcCharacters = RegExp('[-+/*]');
-    return calcCharacters.test(string);
+    characters = RegExp(calcCharacters);
+    return characters.test(string);
 }
 
 
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
-    parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
+    parsedArray = string.split(/(calcCharacters)/); // Separetes the string into numbers and symbols
 
     typeFixedArray = parsedArray.map(e => {
         if (containsCalcCharacters(e)) {
