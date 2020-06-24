@@ -5,7 +5,7 @@ const operations = {
     "/": (a, b) => a/b
 };
 
-const operate = (operation, n1, n2) => operations[operation](n1, n2);
+const calculate = (operation, n1, n2) => operations[operation](n1, n2);
 
 const numberButtons = document.querySelectorAll(".numberButton");
 const operationButtons = document.querySelectorAll('.operationButton');
@@ -54,13 +54,13 @@ const calculateInput = function (input) {
 
     result = 0;
     while (input.length > 1) {
-        result += operate(operation, first_number, second_number);
+        result += calculate(operation, first_number, second_number);
         input.splice(0, 3);
         input.unshift(result);
     }
     return result;
 }
-const buttonDisabler = function () {
+const disableButtonsIfNecessary = function () {
     content = outputBox.innerHTML;
     lastCharacter = content.slice(-1);
     if (containsCalcCharacters(lastCharacter) || !lastCharacter) { //Checks for calcCharacter and emptyness since a calc-character can't be first
@@ -75,7 +75,6 @@ const buttonDisabler = function () {
 equalsButton.addEventListener('click', () => {
     operationToPerform = outputBox.innerHTML;
     parsedInput = parseInputString(operationToPerform);
-    console.log(calculateInput(parsedInput));
     outputBox.innerHTML = parsedInput;
 })
 
@@ -99,13 +98,12 @@ backspace.addEventListener('click', () => {
     outputBox.innerHTML = contentWithoutLastCharacter;
 })
 
-
 clearButton.addEventListener('click', () => {
     outputBox.innerHTML = '';
 })
 
 allButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        buttonDisabler();
+        disableButtonsIfNecessary();
     })
 })
