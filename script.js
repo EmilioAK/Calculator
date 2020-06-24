@@ -75,6 +75,7 @@ const disableButtonsIfNecessary = function () {
 equalsButton.addEventListener('click', () => {
     operationToPerform = outputBox.innerHTML;
     parsedInput = parseInputString(operationToPerform);
+    calculateInput(parsedInput);
     outputBox.innerHTML = parsedInput;
 })
 
