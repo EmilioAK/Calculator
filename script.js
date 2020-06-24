@@ -80,7 +80,7 @@ const disableButtonsIfNecessary = function () {
 const populateOutputbox = function (buttonType) {
     buttonType.forEach((button) => {
         button.addEventListener('click', () => {
-            elementToDisplay = document.createTextNode(button.value);
+            const elementToDisplay = document.createTextNode(button.value);
             outputBox.appendChild(elementToDisplay);
         })
     })
