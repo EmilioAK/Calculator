@@ -77,6 +77,15 @@ const disableButtonsIfNecessary = function () {
     }
 }
 
+const populateOutputbox = function (buttonType) {
+    buttonType.forEach((button) => {
+        button.addEventListener('click', () => {
+            elementToDisplay = document.createTextNode(button.value);
+            outputBox.appendChild(elementToDisplay);
+        })
+    })
+}
+
 equalsButton.addEventListener('click', () => {
     const operationToPerform = outputBox.innerHTML;
     const parsedInput = parseInputString(operationToPerform);
@@ -84,19 +93,9 @@ equalsButton.addEventListener('click', () => {
     outputBox.innerHTML = parsedInput;
 })
 
-operationButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        elementToDisplay = document.createTextNode(button.value);
-        outputBox.appendChild(elementToDisplay);
-    })
-})
+populateOutputbox(operationButtons);
 
-numberButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        elementToDisplay = document.createTextNode(button.value);
-        outputBox.appendChild(elementToDisplay);
-    })
-})
+populateOutputbox(numberButtons);
 
 backspace.addEventListener('click', () => {
     const content = outputBox.innerHTML;
