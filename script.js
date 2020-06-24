@@ -60,15 +60,19 @@ const calculateInput = function (input) {
     }
     return result;
 }
+
+const buttonsToDisable = function (choice) {
+    operationButtons.forEach((button) => button.disabled = choice);
+    equalsButton.disabled = choice;
+}
+
 const disableButtonsIfNecessary = function () {
     content = outputBox.innerHTML;
     lastCharacter = content.slice(-1);
     if (containsCalcCharacters(lastCharacter) || !lastCharacter) { //Checks for calcCharacter and emptyness since a calc-character can't be first
-        operationButtons.forEach((button) => button.disabled = true);
-        equalsButton.disabled = true;
+        buttonsToDisable(true);
     } else {
-        operationButtons.forEach((button) => button.disabled = false);
-        equalsButton.disabled = false;
+        buttonsToDisable(false);
     }
 }
 
