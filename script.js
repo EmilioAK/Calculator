@@ -17,7 +17,7 @@ const outputBox = document.querySelector('#outputBox');
 
 const calcCharacters = '[-+/*]';
 
-const calcCharsWithInclusion = (statement) => statement ? RegExp(`(${calcCharacters})`) : new RegExp(calcCharacters);
+const calcCharsWithInclusion = (statement) => statement ? RegExp(`(${calcCharacters})`) : RegExp(calcCharacters);
 
 const containsCalcCharacters = function (string) {
     const characters = calcCharsWithInclusion(false);
