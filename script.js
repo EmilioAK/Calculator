@@ -5,7 +5,7 @@ const operations = {
     "/": (a, b) => a/b
 };
 
-const operate = (operation, n1, n2) => operations[operation](n1, n2);
+const calculate = (operation, n1, n2) => operations[operation](n1, n2);
 
 const numberButtons = document.querySelectorAll(".numberButton");
 const operationButtons = document.querySelectorAll('.operationButton');
@@ -53,7 +53,7 @@ const calculateInput = function (input) {
 
     result = 0;
     while (input.length > 1) {
-        result += operate(operation, first_number, second_number);
+        result += calculate(operation, first_number, second_number);
         input.splice(0, 3);
         input.unshift(result);
     }
