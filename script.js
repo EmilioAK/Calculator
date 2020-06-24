@@ -61,7 +61,7 @@ const calculateInput = function (input) {
     return result;
 }
 
-const buttonsToDisable = function (choice) {
+const disableButtons = function (choice) {
     operationButtons.forEach((button) => button.disabled = choice);
     equalsButton.disabled = choice;
 }
@@ -70,9 +70,9 @@ const disableButtonsIfNecessary = function () {
     content = outputBox.innerHTML;
     lastCharacter = content.slice(-1);
     if (containsCalcCharacters(lastCharacter) || !lastCharacter) { //Checks for calcCharacter and emptyness since a calc-character can't be first
-        buttonsToDisable(true);
+        disableButtons(true);
     } else {
-        buttonsToDisable(false);
+        disableButtons(false);
     }
 }
 
