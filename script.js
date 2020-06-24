@@ -17,15 +17,17 @@ const outputBox = document.querySelector('#outputBox');
 
 const calcCharacters = '[-+/*]';
 
+const calcCharsWithInclusion = (statement) => statement ? RegExp(`(${calcCharacters})`) : new RegExp(calcCharacters);
+
 const containsCalcCharacters = function (string) {
-    const characters = RegExp(calcCharacters);
+    const characters = calcCharsWithInclusion(false);
     return characters.test(string);
 }
 
 
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
-    const parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
+    const parsedArray = string.split(calcCharsWithInclusion(true)); // Separetes the string into numbers and symbols
 
     const typeFixedArray = parsedArray.map(e => {
         if (containsCalcCharacters(e)) {
