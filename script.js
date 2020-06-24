@@ -18,16 +18,16 @@ const outputBox = document.querySelector('#outputBox');
 const calcCharacters = '[-+/*]';
 
 const containsCalcCharacters = function (string) {
-    characters = RegExp(calcCharacters);
+    const characters = RegExp(calcCharacters);
     return characters.test(string);
 }
 
 
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
-    parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
+    const parsedArray = string.split(/([-+/*])/); // Separetes the string into numbers and symbols
 
-    typeFixedArray = parsedArray.map(e => {
+    const typeFixedArray = parsedArray.map(e => {
         if (containsCalcCharacters(e)) {
             return e;
         } else {
@@ -49,11 +49,11 @@ const calculateInput = function (input) {
     While loop checks for 1 because the last step will be a single element: The result.
     */
     
-    first_number = input[0];
-    operation = input[1];
-    second_number = input[2]
+    const first_number = input[0];
+    const operation = input[1];
+    const second_number = input[2];
 
-    result = 0;
+    let result = 0;
     while (input.length > 1) {
         result += calculate(operation, first_number, second_number);
         input.splice(0, 3);
@@ -68,8 +68,8 @@ const disableButtons = function (choice) {
 }
 
 const disableButtonsIfNecessary = function () {
-    content = outputBox.innerHTML;
-    lastCharacter = content.slice(-1);
+    const content = outputBox.innerHTML;
+    const lastCharacter = content.slice(-1);
     if (containsCalcCharacters(lastCharacter) || !lastCharacter) { //Checks for calcCharacter and emptyness since a calc-character can't be first
         disableButtons(true);
     } else {
@@ -78,8 +78,8 @@ const disableButtonsIfNecessary = function () {
 }
 
 equalsButton.addEventListener('click', () => {
-    operationToPerform = outputBox.innerHTML;
-    parsedInput = parseInputString(operationToPerform);
+    const operationToPerform = outputBox.innerHTML;
+    const parsedInput = parseInputString(operationToPerform);
     calculateInput(parsedInput);
     outputBox.innerHTML = parsedInput;
 })
@@ -99,8 +99,8 @@ numberButtons.forEach((button) => {
 })
 
 backspace.addEventListener('click', () => {
-    content = outputBox.innerHTML;
-    contentWithoutLastCharacter = content.substring(0, content.length - 1);
+    const content = outputBox.innerHTML;
+    const contentWithoutLastCharacter = content.substring(0, content.length - 1);
     outputBox.innerHTML = contentWithoutLastCharacter;
 })
 
