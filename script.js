@@ -32,7 +32,6 @@ const parseInputString = function (string) {
         if (containsCalcCharacters(e)) {
             return e;
         } else if (e.includes(".")) {
-
             return parseFloat(e);
         } else {
             return parseInt(e);
