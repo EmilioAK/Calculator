@@ -40,28 +40,38 @@ const parseInputString = function (string) {
 
 }
 
-const calculateInput = function (input) {
-    /*
-    ALGORITHM DESCRIPTION: The simplest form of an operation consists of 3 elements:
-    1: The first number
-    2: The operation
-    3: The second number
-
-    This function performs this calculation with these 3 factors, then replaces them with one element as the result
-    While loop checks for 1 because the last step will be a single element: The result.
-    */
-    
-    const first_number = input[0];
-    const operation = input[1];
-    const second_number = input[2];
-
-    let result = 0;
-    while (input.length > 1) {
-        result += calculate(operation, first_number, second_number);
-        input.splice(0, 3);
-        input.unshift(result);
+const operationsInInput = function (operations, input) {
+    for (operation of operations) {
+        if (input.includes(operation)) {
+            return true
+        }
     }
-    return result;
+    return false
+}
+
+const calculateInput = function (input) {
+    const mdas = [["*", "/"], ["+", "-"]]
+    for (let operations of mdas) {
+        let isOperators = function (element) {
+            for (operation of operations) {
+                if (element == operation) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        while (operationsInInput(operations, input)) {
+            nextOperator = input.findIndex(isOperators)
+            let first_number = input[nextOperator - 1];
+            let operator = input[nextOperator];
+            let second_number = input[nextOperator + 1];
+            
+            let result = calculate(operator, first_number, second_number);
+            input.splice(input.indexOf(first_number), 3, result)
+        }
+    }
+    return input
 }
 
 const disableButtons = function (choice) {
