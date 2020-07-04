@@ -24,7 +24,6 @@ const containsCalcCharacters = function (string) {
     return characters.test(string);
 }
 
-
 const parseInputString = function (string) {
     // Output: [123, "+", 123]
     const parsedArray = string.split(calcCharsWithInclusion(true)); // Separetes the string into numbers and symbols
@@ -32,6 +31,9 @@ const parseInputString = function (string) {
     const typeFixedArray = parsedArray.map(e => {
         if (containsCalcCharacters(e)) {
             return e;
+        } else if (e.includes(".")) {
+
+            return parseFloat(e);
         } else {
             return parseInt(e);
         }
