@@ -14,6 +14,7 @@ const clearButton = document.querySelector('#clear');
 const allButtons = Array.from(document.getElementsByTagName("input")); // Array.from() needed since it's not given in the same form as the others
 const backspace = document.querySelector('#backspace');
 const outputBox = document.querySelector('#outputBox');
+const decimal = document.querySelector('#decimal');
 
 const calcCharacters = '[-+/*]';
 
@@ -24,9 +25,13 @@ const containsCalcCharacters = function (string) {
     return characters.test(string);
 }
 
-const parseInputString = function (string) {
+const parseInputString = function (string) { // Separetes the string into numbers and symbols
+    return string.split(calcCharsWithInclusion(true));
+}
+
+const parseInputStringToArray = function (string) {
     // Output: [123, "+", 123]
-    const parsedArray = string.split(calcCharsWithInclusion(true)); // Separetes the string into numbers and symbols
+    const parsedArray = parseInputString(string); 
 
     const typeFixedArray = parsedArray.map(e => {
         if (containsCalcCharacters(e)) {
@@ -90,6 +95,20 @@ const disableButtonsIfNecessary = function () {
     }
 }
 
+const disableDecimalIfNecessary = function () {
+    const content = outputBox.innerHTML;
+    const parsedContent = parseInputString(content)
+    const decimalChar = decimal.value;
+    
+    for (element of parsedContent) {
+        if (element.includes(decimalChar)) {
+            decimal.disabled = true;
+        } else {
+            decimal.disabled = false;
+        }
+    }
+}
+
 const populateOutputbox = function (buttonType) {
     buttonType.forEach((button) => {
         button.addEventListener('click', () => {
@@ -101,7 +120,7 @@ const populateOutputbox = function (buttonType) {
 
 equalsButton.addEventListener('click', () => {
     const operationToPerform = outputBox.innerHTML;
-    const parsedInput = parseInputString(operationToPerform);
+    const parsedInput = parseInputStringToArray(operationToPerform);
     calculateInput(parsedInput);
     outputBox.innerHTML = parsedInput;
 })
@@ -123,5 +142,6 @@ clearButton.addEventListener('click', () => {
 allButtons.forEach((button) => {
     button.addEventListener('click', () => {
         disableButtonsIfNecessary();
+        disableDecimalIfNecessary();
     })
 })
